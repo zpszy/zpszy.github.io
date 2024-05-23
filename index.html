@@ -1,87 +1,127 @@
 <!DOCTYPE html>
-< html lang = “en” >
-<头>
-  <元字符集= “UTF-8” >
-  <元名称= “视口” 内容= “宽度=设备宽度，初始比例=1.0” >
-  < title >同学录</ title >
-  <风格>
-    身体{
-      字体系列：Arial、sans-serif；
-      margin: 0;
-      padding: 0;
+<html>
+<head>
+  <title>同学录</title>
+  <style>
+    /* 添加一些基本样式 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
     }
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+
     h1 {
       text-align: center;
     }
-    .student {
+
+    form {
       margin-bottom: 20px;
-      padding: 10px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
-    .student img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      右边距：20px；
-      向左飘浮;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
     }
-    .学生信息{
-      溢出：隐藏；
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
     }
-    .学生信息 p {
-      保证金：0；
+
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
     }
-  </风格>
-</头>
-<正文>
+  </style>
+</head>
+<body>
+  <h1>同学录</h1>
 
-< div class = “容器” >
-  < h1 >同学录</ h1 >
+  <表格id = “学生表格” >
+    < h2 >添加同学信息</ h2 >
+    < label for = "name" >姓名：</ label >
+    <输入类型= “文本”  ID = “名称” 名称= “名称” 必填> < br >
 
-  < div class = “学生” >
-    < img src = "zhangxiaoming.jpg"  alt = "张小明" >
-    < div class = “学生信息” >
-      <p> <strong>姓名：</strong>张小明</p>​​​​​​​
-      <p> <strong>个人简介：</strong>张小明是一名热爱足球的高中生，喜欢参加校内的足球比赛，并在班级里担任学生会主席。</p>
-      <p> <strong>兴趣：</strong>踢足球、看电影、读书</p>​
-      <p> <strong>最喜欢的食物：</strong>披萨</p>​ ​​​
-      <p> <strong>未来的梦想：</strong>成为一名职业足球运动员</p>​
-    </div>​​
-  </div>​​
+    < label for = "class" >课程：</ label >
+    <input type="text" id="class" name="class" required><br>
 
-  < div class = “学生” >
-    < img src = "wangxiaohong.jpg"  alt = "王小红" >
-    < div class = “学生信息” >
-      <p> <strong>姓名：</strong>王小红</p>​​​​​​​
-      < p > <strong>个人简介：</strong>王小红是一个对科学和艺术非常感兴趣的学生，喜欢参加化学实验和美术课程，并在学校的合唱团中担任主唱。</p>
-      <p> <strong>兴趣：</strong>绘画、合唱、科学实验</p>​​
-      <p> <strong>最喜欢的食物：</strong>寿司</p>​​​​
-      <p> <strong>未来的梦想：</strong>成为一名著名的艺术家或科学家</p>
-    </div>​​
-  </div>​​
+    <label for="graduationYear">毕业年份：</label>
+    <input type="number" id="graduationYear" name="graduationYear" required><br>
 
-  < div class = “学生” >
-    < img src = "lixiaohua.jpg"  alt = "李小华" >
-    < div class = “学生信息” >
-      <p> <strong> 姓名：</strong>李小华</p>​​​​​​​
-      <p> <strong>个人简介：</strong>李小华是一名热爱读书和写作的学生，经常参加文学社团的活动，并在学校的写作比赛中获奖。</p>
-      <p> <strong>兴趣：</strong>阅读、写作、参加辩论</p>​​
-      <p> <strong>最喜欢的食物：</strong>汉堡</p>​​​​
-      <p> <strong>未来的梦想：</strong>成为一名成功的作家或记者</p>
-    </div>​​
-  </div>​​
+    <label for="contact">联系方式：</label>
+    <input type="text" id="contact" name="contact" required><br>
 
-</div>​​
+    <input type="submit" value="添加">
+  </form>
 
-</正文>
-</​>
+  <h2>同学列表</h2>
+  <table id="student-table">
+    <tr>
+      <th>姓名</th>
+      <th>班级</th>
+      <th>毕业年份</th>
+      <th>联系方式</th>
+      <th>操作</th>
+    </tr>​​
+  </表格>
+
+  <脚本>
+    // 使用JavaScript处理表单提交事件
+    文档。getElementById ( “学生表单” )。addEventListener （“提交”，函数（事件） {
+      事件。防止违反（）；//阻止表单默认提交行为
+
+      // 获取表单中的值
+      var name = document.getElementById ( "名称" ).值;
+      var classVal = document.getElementById("class").value;
+      var 毕业年份 = document.getElementById("毕业年份").value;
+      var 联系人 = document.getElementById("联系人").值;
+
+      // 创建新的表格行
+      var row = document.createElement("tr");
+
+      //创建单元格并设置值
+      var nameCell = document.createElement("td");
+
+
+
+      var classCell = document.createElement("td");
+
+
+
+      var graduateYearCell = document.createElement("td");
+
+
+
+      var contactCell = document.createElement("td");
+
+
+
+      //创建删除项目
+      var deleteCell = document.createElement("td");
+      var deleteButton = document.createElement("button");
+
+
+
+
+      });
+
+
+
+      // 将新行添加到表格中
+
+
+      // 清空表单
+
+
+
+
+    });
+  </脚本>
+
+
